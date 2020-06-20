@@ -52,23 +52,23 @@ for j in range (4,15):
     BHhalos = findBHhalos(s)
     #sorting the halos, indexes/indecis are like an exact address
     currenthalo = np.argsort(BHhalos)
-    print BHhalos[currenthalo]
+    #print BHhalos[currenthalo]
 
-    for i in currenthalo:
+    #for i in currenthalo:
     
         #which halo are we on?
-        currenthalo = BHhalos[i]
-        print 'current halo: ', currenthalo
-        print i
+        #currenthalo = BHhalos[i]
+        #print 'current halo: ', currenthalo
+        #print i
         
         
         # if there are two black holes
-        if len(BH)== 2:
+     if len(BH)== 2:
   
             if  BHhalos[0]  ==  BHhalos[1]:
                 print "black holes are in the same halo"
                 #put the galaxy you care about in the center of the simulation
-                pynbody.analysis.angmom.sideon(h[currenthalo])
+                pynbody.analysis.angmom.sideon(h[5])
 
                 BHposition=BH['pos']
 
@@ -106,7 +106,7 @@ for j in range (4,15):
                 print "black holes are in different halos"
              
                 #put the galaxy you care about in the center of the simulation
-                pynbody.analysis.angmom.sideon(h[currenthalo])
+                pynbody.analysis.angmom.sideon(h[5])
                 #this is the position of black hole
                 BHposition=BH['pos']
 
@@ -143,7 +143,7 @@ for j in range (4,15):
               
             print "black holes are one black hole now"
             #put the galaxy you care about in the center of the simulation
-            pynbody.analysis.angmom.sideon(h[currenthalo])
+            pynbody.analysis.angmom.sideon(h[5])
 
             BHposition=BH['pos']
 
