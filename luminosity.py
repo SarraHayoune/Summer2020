@@ -1,5 +1,6 @@
-#!/usr/bin/python2.7
-# -*- coding: utf-8 -*-
+'''This is Katy's code (https://github.com/04301998/Lupe_project-/blob/master/ACC.py) to plot the black hole luminosity.
+         I made some adjustements and added helpful comments '''
+
 import pynbody
 import pylab
 import numpy as np
@@ -11,31 +12,42 @@ import pandas as pd
 import warnings
 import decimal
 import statistics
+
 # Loading files
 Hfiles = readcol.readcol('/media/jillian/cptmarvel/cptmarvel.cosmo25cmb.4096g5HbwK1BH.004096/supersample/highres/cptmarvel.test.orbit')
 Ffiles =  readcol.readcol('/media/jillian/cptmarvel/cptmarvel.cosmo25cmb.4096g5HbwK1BH.004096/supersample/fatso/cptmarvel.fatso.orbit')
 
-# DATA
-# Convertions
+# Convertions:
+
+# The following numbers are from the simulation
 m_sol= 2.31e15
-print m_sol.units
 l_kpc  = 25000
+timee = 38.78  # Time conversion: simulation units time to Gyr 
+d_timee = 1.22386438e18 # Time conversion: simulation units to seconds
+#t_square= d_time ^2
+t_square = 1.49784401e36
 m_g = 1.989e33 # Sun mass in gram
 l_cm = 3.086e21 # kpc to cm
-timee = 38.78
-d_timee = 1.22386438e18
-t_square = 1.49784401e36
+
+
+
          
-# Highes Accretion
-Denergy =( Ffiles[:,13]* m_sol*( l_kpc**2) *m_g *(l_cm**2))/t_square
-Dtime = Ffiles[:,14]*d_timee
+# delta energy
+Denergy =( Ffiles[:,13]* m_sol*( l_kpc**2) *m_g *(l_cm**2))/t_square #units here are ergs
+#delta time
+Delta_time = Ffiles[:,14]*d_timee
 dEdt = Denergy/Dtime
-Time =((Ffiles[:,1])-0.9999999)*timee
+Time =((Ffiles[:,1]))*timee
 print(Time)
 print(timee)
 
 
-# Functions
+# Functions:
+
+''' Create 2 parallel iterators (a,b) pointing to the first element of the original iterable.
+The second iterator, b is moved 1 step forward (the next(b, None)) call).  a points to c0 and b points to c1.
+Both a and b can traverse the original iterator independently - the izip function takes the two iterators and makes pairs 
+of the returned elements, advancing both iterators at the same pace.'''
 
 def pair(iterable):
     "c -> (c0,c1), (c1,c2), (c2, c3), ..." # This function creates ordered pairs 
