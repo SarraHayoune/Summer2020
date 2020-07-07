@@ -14,7 +14,7 @@ import decimal
 import statistics
 
 # Loading files
-files = readcol.readcol('/media/jillian/cptmarvel/cptmarvel.cosmo25cmb.4096g5HbwK1BH.orbit
+files = readcol.readcol('/media/jillian/cptmarvel/cptmarvel.cosmo25cmb.4096g5HbwK1BH.orbit')
 
 
 # Convertions:
@@ -33,11 +33,11 @@ l_cm = 3.086e21 # kpc to cm
 # delta energy
 Denergy =( files[:,13]* m_sol*( l_kpc**2) *m_g *(l_cm**2))/t_square #units here are ergs
 #delta time
-Delta_time = files[:,14]*d_timee
+Dtime = files[:,14]*d_timee
 dEdt = Denergy/Dtime
 Time =((files[:,1]))*timee
-print(Time)
-print(timee)
+#print(Time)
+#print(timee)
 
 
 # Functions:
@@ -70,7 +70,7 @@ def combining(Time,dEdt,intervals):
 
     for tmin, tmax in intervals:
         filter = (Time >= tmin) & (Time < tmax)
-        out.append(np.mean(dEdt[mask]))
+        out.append(np.mean(dEdt[filter]))
     return np.array(out)
 
 b = len(intervals)
