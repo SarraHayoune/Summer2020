@@ -14,8 +14,23 @@ import decimal
 import statistics
 
 # Loading files
-files = readcol.readcol('/media/jillian/cptmarvel/cptmarvel.cosmo25cmb.4096g5HbwK1BH.orbit')
+s = readcol.readcol('/media/jillian/cptmarvel/cptmarvel.cosmo25cmb.4096g5HbwK1BH.orbit')
+def findBH(s):
+    BH= s.stars[ np.where((s.stars['iord']==89425759 )]
+        # 101863565) | ( s.stars['iord']==101863727) 
+    return BH
+  
+def findBHhalos(s):
+    BH = findBH(s)
+    BHhalos = BH['amiga.grp']
+    return BHhalos
+ # convert the units 
+ s.physical_units()
 
+    #  load any available halo
+ h = s.halos()
+ BH = findBH(s)
+ BHhalos = findBHhalos(s)
 
 # Convertions:
 
@@ -31,11 +46,11 @@ l_cm = 3.086e21 # kpc to cm
 
          
 # delta energy
-Denergy =( files[:,13]* m_sol*( l_kpc**2) *m_g *(l_cm**2))/t_square #units here are ergs
+Denergy =( s[:,13]* m_sol*( l_kpc**2) *m_g *(l_cm**2))/t_square #units here are ergs
 #delta time
-Dtime = files[:,14]*d_timee
+Dtime = s[:,14]*d_timee
 dEdt = Denergy/Dtime
-Time =((files[:,1]))*timee
+Time =((s[:,1]))*timee
 #print(Time)
 #print(timee)
 
