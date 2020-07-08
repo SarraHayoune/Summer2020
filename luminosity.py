@@ -31,11 +31,11 @@ l_cm = 3.086e21 # kpc to cm
 
          
 # delta energy
-Denergy=( files[:,13]* m_sol*( l_kpc**2) *m_g *(l_cm**2))/t_square #units here are ergs
+Denergy=( files[:,13][i]* m_sol*( l_kpc**2) *m_g *(l_cm**2))/t_square #units here are ergs
 #delta time
-Dtime = files[:,14]*d_timee
+Dtime = files[:,14][i]*d_timee
 dEdt = Denergy/Dtime
-Time=((files[:,1]))*timee
+Time=((files[:,1][i]))*timee
 #print(Time)
 #print(timee)
 
@@ -80,7 +80,7 @@ b = len(intervals)
 
 
 plt.title(" $\Delta$E/$\Delta$t vs Time")
-plt.plot(centers, combining(Time[i], dEdt[i], intervals),'ro', label=('CptMarvel')) # FATSO
+plt.plot(centers, combining(Time, dEdt, intervals),'ro', label=('CptMarvel')) # FATSO
 #plt.scatter(Time, dEdt)
 plt.legend(loc = 'upper right')
 plt.xlabel("Time(Gyrs)")
