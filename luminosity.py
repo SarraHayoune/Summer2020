@@ -14,26 +14,11 @@ import decimal
 import statistics
 
 # Loading files
-s = readcol.readcol('/media/jillian/cptmarvel/cptmarvel.cosmo25cmb.4096g5HbwK1BH.orbit')
-def findBH(s):
-    BH= s.stars[ np.where((s.stars['iord']==89425759 )]
-        # 101863565) | ( s.stars['iord']==101863727) 
-    return BH
-  
-def findBHhalos(s):
-    BH = findBH(s)
-    BHhalos = BH['amiga.grp']
-    return BHhalos
- # convert the units 
- s.physical_units()
-
-    #  load any available halo
- h = s.halos()
- BH = findBH(s)
- BHhalos = findBHhalos(s)
-
+files = readcol.readcol('/media/jillian/cptmarvel/cptmarvel.cosmo25cmb.4096g5HbwK1BH.orbit')
+i =np.where(files[:,0]==  89425759)
+BHID= 89425759
+#i= np.where(BHID== 89425759)
 # Convertions:
-
 # The following numbers are from the simulation
 m_sol= 2.31e15
 l_kpc  = 25000
@@ -46,11 +31,11 @@ l_cm = 3.086e21 # kpc to cm
 
          
 # delta energy
-Denergy =( s[:,13]* m_sol*( l_kpc**2) *m_g *(l_cm**2))/t_square #units here are ergs
+Denergy=( files[:,13]* m_sol*( l_kpc**2) *m_g *(l_cm**2))/t_square #units here are ergs
 #delta time
-Dtime = s[:,14]*d_timee
+Dtime = files[:,14]*d_timee
 dEdt = Denergy/Dtime
-Time =((s[:,1]))*timee
+Time=((files[:,1]))*timee
 #print(Time)
 #print(timee)
 
@@ -88,13 +73,14 @@ def combining(Time,dEdt,intervals):
         out.append(np.mean(dEdt[filter]))
     return np.array(out)
 
+
 b = len(intervals)
-print(centers)
-print(combining(Time, dEdt, intervals))
+#print(centers)
+#print(combining(Time, dEdt, intervals))
 
 
 plt.title(" $\Delta$E/$\Delta$t vs Time")
-plt.plot(centers, combining(Time, dEdt, intervals),'ro', label=('CptMarvel')) # FATSO
+plt.plot(centers, combining(Time[i], dEdt[i], intervals),'ro', label=('CptMarvel')) # FATSO
 #plt.scatter(Time, dEdt)
 plt.legend(loc = 'upper right')
 plt.xlabel("Time(Gyrs)")
