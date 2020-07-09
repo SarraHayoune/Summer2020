@@ -15,8 +15,10 @@ import statistics
 
 # Loading files
 files = readcol.readcol('/media/jillian/cptmarvel/cptmarvel.cosmo25cmb.4096g5HbwK1BH.orbit')
-i =np.where(files[:,0]==  89425759)
 BHID= 89425759
+i =np.where(files[:,0]==  BHID)
+print (files[:,0][i])
+
 #i= np.where(BHID== 89425759)
 # Convertions:
 # The following numbers are from the simulation
