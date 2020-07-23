@@ -1,0 +1,27 @@
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
+
+img1= mpimg.imread('ID= 89425759,z= 3.8.png')
+img2= mpimg.imread('ID= 89425759,z= 1.5.png')
+img3= mpimg.imread('ID= 89425759,z= 1.75.png')
+
+img4= mpimg.imread('ID= 89425759,z= 2.29.png')
+img5= mpimg.imread('ID= 89425759,z= 2.65.png')
+img6= mpimg.imread('ID= 89425759,z= 3.13.png')
+
+
+
+
+
+
+
+
+fig,((ax1, ax2,ax3),(ax4,ax5,ax6))= plt.subplots(2,3,sharex=True, sharey=True)
+ax1.imshow(img1)
+ax2.imshow(img2)
+ax3.imshow(img3)
+ax4.imshow(img4)
+ax5.imshow(img5)
+ax6.imshow(img6)
+
